@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gemini AI Demo</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🐾 Gemini AI Demo</h1>
+    <p>Ask Gemini about anything, even your animal friends below!</p>
+
+    <div class="gallery">
+      <img src="/static/cat.jpg" alt="Cat">
+      <img src="/static/dog.jpg" alt="Dog">
+      <img src="/static/elephant.jpg" alt="Elephant">
+    </div>
+
+    <textarea id="prompt" placeholder="Type your question here..."></textarea>
+    <button onclick="analyze()">Ask Gemini</button>
+
+    <div id="response" class="response-box"></div>
+  </div>
+
+  <script>
+    async function analyze() {
+      const prompt = document.getElementById("prompt").value;
+      const responseDiv = document.getElementById("response");
+      responseDiv.innerHTML = "⏳ Thinking...";
+
+      try {
+        const res = await fetch("/analyze", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt })
+        });
+
+        const data = await res.json();
+        if (data.response) {
+          responseDiv.innerHTML = "<b>Gemini:</b> " + data.response;
+        } else {
+          responseDiv.innerHTML = "⚠️ Error: " + data.error;
+        }
+      } catch (err) {
+        responseDiv.innerHTML = "❌ Failed: " + err.message;
+      }
+    }
+  </script>
+</body>
+</html>

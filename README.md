@@ -1,40 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>README - Gemini Flask UI</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      margin: 20px;
-      max-width: 900px;
-      background: #f8f9fa;
-      color: #212529;
-    }
-    h1, h2, h3 {
-      color: #0056b3;
-    }
-    code, pre {
-      background: #e9ecef;
-      padding: 4px 6px;
-      border-radius: 5px;
-      font-size: 0.95em;
-    }
-    pre {
-      padding: 12px;
-      overflow-x: auto;
-    }
-    .container {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-  </style>
-</head>
-<body>
+
   <div class="container">
     <h1>🐍 Gemini Flask Image Classifier</h1>
     <p>This project is a simple <strong>Flask web app</strong> integrated with the <strong>Gemini API</strong> for <em>image classification</em>. It allows users to upload an image (e.g., cat, dog, elephant) and receive AI-powered predictions with a modern UI.</p>

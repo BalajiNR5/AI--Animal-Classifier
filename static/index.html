@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Animal Classifier</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>🐾 AI Animal Classifier</h1>
+
+    <form id="uploadForm" enctype="multipart/form-data">
+      <input type="file" name="image" accept="image/*">
+      <button type="submit">Analyze Image</button>
+    </form>
+
+    <h2>Or enter a text prompt:</h2>
+    <textarea id="prompt" placeholder="Ask about an animal..."></textarea>
+    <button onclick="analyzePrompt()">Submit Prompt</button>
+
+    <div class="response-box" id="response"></div>
+  </div>
+
+  <script>
+    // Text prompt analysis
+    async function analyzePrompt() {
+      const prompt = document.getElementById("prompt").value;
+      const res = await fetch("/analyze", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({prompt})
+      });
+      const data = await res.json();
+      document.getElementById("response").innerText = data.response || data.error;
+    }
+
+    // Image upload analysis
+    document.getElementById("uploadForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const res = await fetch("/analyze", {
+        method: "POST",
+        body: formData
+      });
+      const data = await res.json();
+      document.getElementById("response").innerText = data.response || data.error;
+    });
+  </script>
+</body>
+</html>
